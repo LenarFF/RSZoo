@@ -231,14 +231,14 @@
 .map {
   max-width: 100%;
 }
-.zoogeography__marker {
-  transition: 0.5s;
-}
+
 .tiny-eagle {
   height: 49px;
 }
 .zoogeography__marker {
+  transition: 0.5s;
   position: absolute;
+  cursor: pointer;
   width: 77px;
   height: 77px;
   border-radius: 77% 77% 0% 111% / 77% 134% 0% 77%;

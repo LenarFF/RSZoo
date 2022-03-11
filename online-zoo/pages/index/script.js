@@ -29,23 +29,36 @@ function hideForm() {
   userForm.classList.add("hidden");
 }
 
+function enableSubmit() {
+  userSubmit.classList.add("user-form__submit_valid");
+  userSubmit.removeAttribute("disabled");
+}
+
+function disableSubmit() {
+  userSubmit.classList.remove("user-form__submit_valid");
+  userSubmit.setAttribute("disabled", true);
+}
+
+function clearInputs() {
+  userEmail.value = "";
+  name.value = "";
+  textarea.value = "";
+}
+
 function validation() {
   const regexEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   if (name.value && textarea.value && regexEmail.test(userEmail.value)) {
-    userSubmit.classList.add("user-form__submit_valid");
-    userSubmit.removeAttribute("disabled");
+    enableSubmit();
   } else {
-    userSubmit.classList.remove("user-form__submit_valid");
-    userSubmit.setAttribute("disabled", true);
+    disableSubmit();
   }
 }
 
 function handleSubmit(e) {
   e.preventDefault();
   hideForm();
-  userEmail.value = "";
-  name.value = "";
-  textarea.value = "";
+  clearInputs();
+  disableSubmit();
 }
 
 // famous pets

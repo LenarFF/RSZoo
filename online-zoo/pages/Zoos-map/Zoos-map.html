@@ -76,6 +76,43 @@
             class="burger-menu__img"
           />
         </div>
+        <form class="user-form hidden">
+          <h3 class="user-form__header">Your feedback</h3>
+          <label class="user-form__label" for="user-name">
+            Your name:
+            <input
+              class="user-form__input"
+              required
+              id="user-name"
+              placeholder="enter name"
+              type="text"
+            />
+          </label>
+          <label class="user-form__label" for="email">
+            Your e-mail:
+            <input
+              class="user-form__input"
+              required
+              id="email"
+              placeholder="enter e-mail"
+              type="email"
+            />
+          </label>
+          <label
+            class="user-form__label user-form__label_textarea"
+            for="review"
+          >
+            Your review:
+            <textarea
+              required
+              class="user-form__textarea"
+              id="review"
+            ></textarea>
+          </label>
+          <button disabled class="user-form__submit" type="submit">
+            Send for moderation
+          </button>
+        </form>
       </header>
       <aside class="sidebar">
         <div class="logo">
