@@ -1,21 +1,71 @@
+// user form
+
+const userIcon = document.querySelector(".profile-icon");
+const userForm = document.querySelector(".user-form");
+const name = document.getElementById("user-name");
+const userEmail = document.getElementById("email");
+const textarea = document.querySelector(".user-form__textarea");
+const userSubmit = document.querySelector(".user-form__submit");
+
+userIcon.addEventListener("click", () => handleIcon());
+name.addEventListener("input", () => validation());
+userEmail.addEventListener("input", () => validation());
+textarea.addEventListener("input", () => validation());
+userSubmit.addEventListener("click", (e) => handleSubmit(e));
+
+function handleIcon() {
+  if (userForm.classList.contains("hidden")) {
+    showForm();
+  } else {
+    hideForm();
+  }
+}
+
+function showForm() {
+  userForm.classList.remove("hidden");
+}
+
+function hideForm() {
+  userForm.classList.add("hidden");
+}
+
+function validation() {
+  const regexEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  if (name.value && textarea.value && regexEmail.test(userEmail.value)) {
+    userSubmit.classList.add("user-form__submit_valid");
+    userSubmit.removeAttribute("disabled");
+  } else {
+    userSubmit.classList.remove("user-form__submit_valid");
+    userSubmit.setAttribute("disabled", true);
+  }
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  hideForm();
+  userEmail.value = "";
+  name.value = "";
+  textarea.value = "";
+}
+
 // famous pets
-const slider = document.querySelector('.famous-pets__slider');
-const right = document.querySelector('.famous-pets__right');
+const slider = document.querySelector(".famous-pets__slider");
+const right = document.querySelector(".famous-pets__right");
 const left = document.querySelector(".famous-pets__left");
-const content = document.querySelector(".famous-pets__images-wrap")
+const content = document.querySelector(".famous-pets__images-wrap");
 let space = 40;
 let counter = 0;
 
 let wrapWidth = slider.offsetWidth;
-let slideWidth = document.querySelector('.famous-pets__image-wrap').offsetWidth;
-window.addEventListener('resize', (e) => {
+let slideWidth = document.querySelector(".famous-pets__image-wrap").offsetWidth;
+window.addEventListener("resize", (e) => {
   moveIt(counter);
   wrapWidth = slider.offsetWidth;
-  slideWidth = document.querySelector('.famous-pets__image-wrap').offsetWidth;
+  slideWidth = document.querySelector(".famous-pets__image-wrap").offsetWidth;
 });
 
-const media = window.matchMedia('(max-width: 1200px)');
-if (media.matches){
+const media = window.matchMedia("(max-width: 1200px)");
+if (media.matches) {
   space = 30;
 } else {
   space = 40;
@@ -23,55 +73,51 @@ if (media.matches){
 
 content.after(content.cloneNode(true));
 
-right.addEventListener('click', e => {
+right.addEventListener("click", (e) => {
   counter++;
   if (counter > 5) {
     counter = 0;
     console.log(space);
-    slider.scrollTo( {           
+    slider.scrollTo({
       left: (slideWidth + space) * counter,
-      behavior: "instant"
-    })
+      behavior: "instant",
+    });
     moveIt(counter);
     counter++;
   }
   moveIt(counter);
-
 });
 
-left.addEventListener('click', e => {
-  counter--;  
+left.addEventListener("click", (e) => {
+  counter--;
   if (counter < 0) {
     counter = 5;
-    slider.scrollTo( {
+    slider.scrollTo({
       left: (slideWidth + space) * counter,
-      behavior: "instant"
-    })
+      behavior: "instant",
+    });
     setTimeout(moveIt(counter - 1), 1);
     counter--;
   } else {
-    moveIt(counter)
+    moveIt(counter);
   }
 });
-
-
 
 function moveIt(counter) {
   slider.scrollTo({
     left: (slideWidth + space) * counter,
-    behavior: "smooth"
-  })
+    behavior: "smooth",
+  });
 }
 
 // Форма
 const feedbackButton = document.querySelector(".testimonials__feedback-button");
 const cover = document.querySelector(".cover");
 const form = document.querySelector(".feedback-wrapper");
-const userName = document.getElementById('name');
-const email = document.getElementById('email');
-const review = document.getElementById('text-feedback');
-const sendButton = document.getElementById('send');
-
+const userName = document.getElementById("name");
+const email = document.getElementById("email");
+const review = document.getElementById("text-feedback");
+const sendButton = document.getElementById("send");
 
 function validateForm() {
   if (
@@ -80,46 +126,43 @@ function validateForm() {
     review.value.length <= 280 &&
     review.value.length > 0
   ) {
-    sendButton.classList.remove('invalid');
+    sendButton.classList.remove("invalid");
   } else {
-    sendButton.classList.add('invalid');
+    sendButton.classList.add("invalid");
   }
 }
 
-
-feedbackButton.addEventListener('click', () => {  
-  cover.classList.remove('hidden');
-  form.classList.remove('hidden');
-  document.body.classList.add('notScrollable');
+feedbackButton.addEventListener("click", () => {
+  cover.classList.remove("hidden");
+  form.classList.remove("hidden");
+  document.body.classList.add("notScrollable");
 });
 
-cover.addEventListener('click', () => {
-  cover.classList.add('hidden');
-  form.classList.add('hidden');  
-  document.body.classList.remove('notScrollable');
+cover.addEventListener("click", () => {
+  cover.classList.add("hidden");
+  form.classList.add("hidden");
+  document.body.classList.remove("notScrollable");
 });
 
-sendButton.addEventListener('click', (e) => {  
+sendButton.addEventListener("click", (e) => {
   e.preventDefault();
-  if (sendButton.classList.contains('invalid')) return;
-  cover.classList.add('hidden');
-  form.classList.add('hidden');  
-  document.body.classList.remove('notScrollable');
+  if (sendButton.classList.contains("invalid")) return;
+  cover.classList.add("hidden");
+  form.classList.add("hidden");
+  document.body.classList.remove("notScrollable");
 });
 
-userName.addEventListener('input', () => {
+userName.addEventListener("input", () => {
   validateForm();
 });
 
-email.addEventListener('input', () => {
+email.addEventListener("input", () => {
   validateForm();
 });
 
-review.addEventListener('input', () => {
-  validateForm();   
+review.addEventListener("input", () => {
+  validateForm();
 });
-
-
 
 //Zoogeography
 
@@ -130,75 +173,66 @@ const alligatorCard = document.getElementById("alligator-card");
 const eagleMarker = document.querySelector(".zoogeography__eagle-marker");
 const pandaMarker = document.querySelector(".zoogeography__panda-marker");
 const gorillaMarker = document.querySelector(".zoogeography__gorilla-marker");
-const alligatorMarker = document.querySelector(".zoogeography__alligator-marker");
+const alligatorMarker = document.querySelector(
+  ".zoogeography__alligator-marker"
+);
 
 const cards = [eagleCard, pandaCard, gorillaCard, alligatorCard];
 const markers = [eagleMarker, pandaMarker, gorillaMarker, alligatorMarker];
 
 function addHidden() {
   cards.forEach((card) => {
-    card.classList.add("hidden")
-})
+    card.classList.add("hidden");
+  });
 }
 function removeScale() {
   markers.forEach((marker) => {
-    marker.classList.remove("scale")
-  })
+    marker.classList.remove("scale");
+  });
 }
 
-eagleMarker.addEventListener("click", () => 
-{
+eagleMarker.addEventListener("click", () => {
   addHidden();
   removeScale();
-  eagleMarker.classList.add('scale');
+  eagleMarker.classList.add("scale");
   eagleCard.classList.remove("hidden");
-})
+});
 
-pandaMarker.addEventListener("click", () => 
-{
+pandaMarker.addEventListener("click", () => {
   addHidden();
   removeScale();
-  pandaMarker.classList.add('scale');
+  pandaMarker.classList.add("scale");
   pandaCard.classList.remove("hidden");
-})
+});
 
-gorillaMarker.addEventListener("click", () => 
-{
+gorillaMarker.addEventListener("click", () => {
   addHidden();
   removeScale();
-  gorillaMarker.classList.add('scale');
+  gorillaMarker.classList.add("scale");
   gorillaCard.classList.remove("hidden");
-})
+});
 
-alligatorMarker.addEventListener("click", () => 
-{
+alligatorMarker.addEventListener("click", () => {
   addHidden();
   removeScale();
   alligatorCard.classList.remove("hidden");
-  alligatorMarker.classList.add('scale');
-})
-
-
-
+  alligatorMarker.classList.add("scale");
+});
 
 // Testimonials
-
-
-
-
-const carousel = document.querySelector('.testimonials__reviews');
-const next = document.querySelector('.testimonials__arrow-right');
+const carousel = document.querySelector(".testimonials__reviews");
+const next = document.querySelector(".testimonials__arrow-right");
 const prev = document.querySelector(".testimonials__arrow-left");
 let gap = 40;
 let slideNumber = 0;
 let moveTimeout = null;
 
-const mediaQuery = window.matchMedia('(max-width: 1200px)');
+const mediaQuery = window.matchMedia("(max-width: 1200px)");
 if (mediaQuery.matches) gap = 30;
 
 let width = carousel.offsetWidth;
-let imgWidth = document.querySelector('.testimonials__review').offsetWidth;
-window.addEventListener('resize', (e) => {
+let imgWidth = document.querySelector(".testimonials__review").offsetWidth;
+window.addEventListener("resize", (e) => {
   if (mediaQuery.matches) {
     gap = 30;
   } else {
@@ -206,41 +240,36 @@ window.addEventListener('resize', (e) => {
   }
   carousel.scrollTo((imgWidth + gap) * slideNumber, 0);
   width = carousel.offsetWidth;
-  imgWidth = document.querySelector('.testimonials__review').offsetWidth;
-
+  imgWidth = document.querySelector(".testimonials__review").offsetWidth;
 });
 
-
-next.addEventListener('click', e => {
+next.addEventListener("click", (e) => {
   timeDelay();
   slideNumber++;
   if (slideNumber > 6) {
-    slideNumber = 0
+    slideNumber = 0;
   }
   carousel.scrollTo((imgWidth + gap) * slideNumber, 0);
-
 });
 
-prev.addEventListener('click', e => {
+prev.addEventListener("click", (e) => {
   timeDelay();
   slideNumber--;
   if (slideNumber < 0) {
-    slideNumber = 6
+    slideNumber = 6;
   }
   carousel.scrollTo((imgWidth + gap) * slideNumber, 0);
 });
 
 const moveSlides = () => {
   slideNumber++;
-  console.log(slideNumber);
-  if (slideNumber > 6) {    
-      slideNumber = 0;    
+  if (slideNumber > 6) {
+    slideNumber = 0;
   }
   carousel.scrollTo((imgWidth + gap) * slideNumber, 0);
-}
+};
 
 let moveInterval = setInterval(moveSlides, 10000);
-
 
 const timeDelay = () => {
   clearTimeout(moveTimeout);
@@ -251,6 +280,5 @@ const timeDelay = () => {
     clearInterval(moveInterval);
     moveInterval = setInterval(moveSlides, 10000);
   }, 10000);
-}
-carousel.addEventListener('click', timeDelay);
-
+};
+carousel.addEventListener("click", timeDelay);
